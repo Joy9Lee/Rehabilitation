@@ -1,7 +1,7 @@
 close all;
 clear;
 clc;
-addpath('./NN')
+addpath('../DATA')
 load('synDataA');
 load('synDataU');
 %%
