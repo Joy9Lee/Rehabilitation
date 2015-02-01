@@ -20,13 +20,16 @@ end
 figure;
 for i=1:16
     Ang=mapminmax(synDataA(i).ang.shd.adb',0,synDataA(i).ang.shd.adb(end)/90)';
-    subplot(4,4,i)
+    subplot(8,2,i)
     deltPtrap=synDataA(i).sEMG(:,2)./(synDataA(i).sEMG(:,2)+synDataA(i).sEMG(:,1));
     bicTri=synDataA(i).sEMG(:,3)./(synDataA(i).sEMG(:,3)+synDataA(i).sEMG(:,4));
     plot(Ang*90,deltPtrap,'r',Ang*90,bicTri,'g');
-    hleg=legend('三角肌前组/（三角肌前组+斜方肌）','二头肌/(二头肌+三头肌)');
-    set(hleg,'Fontsize',6);
+    if i==1
+        hleg=legend('三角肌前组/（三角肌前组+斜方肌）','二头肌/(二头肌+三头肌)');
+        set(hleg,'Fontsize',6,'Location','NorthOutside');
+    end
     xlabel('关节角');
+    xlim([0 90]);
     ylim([0 1]);
     S=num2str(synDataA(i).FM);
     S=['FM=',S];
@@ -40,9 +43,13 @@ for i=1:10
     deltPtrap=synDataU(i).sEMG(:,2)./(synDataU(i).sEMG(:,2)+synDataU(i).sEMG(:,1));
     bicTri=synDataU(i).sEMG(:,3)./(synDataU(i).sEMG(:,3)+synDataU(i).sEMG(:,4));
     plot(Ang*90,deltPtrap,'r',Ang*90,bicTri,'g');
-    hleg=legend('三角肌前组/（三角肌前组+斜方肌）','二头肌/(二头肌+三头肌)');
-    set(hleg,'Fontsize',6);
+    if i==1
+        hleg=legend('三角肌前组/（三角肌前组+斜方肌）','二头肌/(二头肌+三头肌)');
+        set(hleg,'Fontsize',6,'Location','South');
+    end
+     %     
     xlabel('关节角');
+    xlim([0 90]);
     ylim([0 1]);
    % title('左手患侧');
 end
