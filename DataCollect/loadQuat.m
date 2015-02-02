@@ -7,17 +7,16 @@ function quat = loadQuat(path,index)
 %   qiat{i}.limb(j) indicate the section of the motion, and j indicate the
 %   limb. 1=waist 2=arm 3=forearm 4=hand.
 %% load original data
-%path='F:\SNARC-work\康复\DATA\正常组\干汝起\右手\运动\1-2013-11-21 11-6-48\';
-waist = importdata([path 'Quad3.txt']);
-arm = importdata([path 'Quad13.txt']);
-forearm = importdata([path 'Quad14.txt']);
-hand = importdata([path 'Quad15.txt']);
+%path='G:\SNARC\数据\患者组\姜明\右手偏\运动\1-2013-11-21 10-10-6\';
+waist = load([path 'Quad3.txt']);
+arm = load([path 'Quad13.txt']);
+forearm = load([path 'Quad14.txt']);
+hand = load([path 'Quad15.txt']);
 %% segment the data
 N=length(index);
 %check the length matched.
 if index(N)-1~=length(waist);       
     disp('Warnning!Data length mismatch.');
-    disp(path);
 end
 %add the frist index.
 index=[1;index];
