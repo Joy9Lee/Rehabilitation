@@ -1,8 +1,8 @@
 % read data
-clear all
+clear all+
 close all
 clc
-oriPath='G:\SNARC\数据\患者组';
+oriPath='G:\SNARC\数据\正常组';
 nameList = dir(fullfile(oriPath));
 for n = 1:length(nameList)-2
     DataA(n).name=nameList(n+2).name;
@@ -38,9 +38,9 @@ for n = 1:length(nameList)-2
                     end
                 end
             end
+            %if strcmp(typeList(j+2).name,'肌电')==1
             
-        %data(i)=load(fullfile(PATH_NAME,nameList(n+2).name,handList(i+2).name));
-        %rawdata{i}=data(i).datablock1.data;
+        
         end
         
     end
