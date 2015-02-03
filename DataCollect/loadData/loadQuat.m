@@ -22,8 +22,8 @@ end
 %add the frist index.
 index=[1;index];
 for i = 1:N
-    quat{i}.limb{1}=waist(index(i):index(i+1)-1,:);
-    quat{i}.limb{2}=arm(index(i):index(i+1)-1,:);
-    quat{i}.limb{3}=forearm(index(i):index(i+1)-1,:);
-    quat{i}.limb{4}=hand(index(i):index(i+1)-1,:);
+    quat(i).limb{1}=waist(index(i):index(i+1)-1,:);
+    quat(i).limb{2}=arm(index(i):index(i+1)-1,:);
+    quat(i).limb{3}=forearm(index(i):index(i+1)-1,:);
+    quat(i).limb{4}=hand(index(i):index(i+1)-1,:);
 end
