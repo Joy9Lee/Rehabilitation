@@ -10,8 +10,8 @@ function Hd = lowpassfir
 % All frequency values are in Hz.
 Fs = 50;  % Sampling Frequency
 
-N    = 20;       % Order
-Fc   = 2;       % Cutoff Frequency
+N    = 40;       % Order
+Fc   = 1;       % Cutoff Frequency
 flag = 'scale';  % Sampling Flag
 
 % Create the window vector for the design algorithm.
