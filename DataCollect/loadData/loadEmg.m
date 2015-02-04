@@ -1,4 +1,4 @@
-function sEMG = loadEmg(filePath)
+function emgData = loadEmg(filePath)
 %loadEmg is used to load the sEMG matrix from ASC files outputing by
 %MegaWin.
 %%
