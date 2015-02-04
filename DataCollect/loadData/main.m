@@ -2,13 +2,13 @@
 clear all
 close all
 clc
-oriPath='G:\SNARC\数据\患者组';
+oriPath='G:\SNARC\数据\正常组';
 nameList = dir(fullfile(oriPath));
 for n = 1:length(nameList)-2
     DataA(n).name=nameList(n+2).name;
     sideList=dir(fullfile(oriPath,nameList(n+2).name));
     for i=1:length(sideList)-2
-        if ~(isempty(findstr(sideList(i+2).name,'偏')) && isempty(findstr(sideList(i+2).name,'瘫')))
+        if ~(isempty(findstr(sideList(i+2).name,'偏')) && isempty(findstr(sideList(i+2).name,'瘫'))&& isempty(findstr(sideList(i+2).name,'患')))
             DataA(n).affSide=sideList(i+2).name(1);
         end
         if strcmp(sideList(i+2).name(1),'左')==1

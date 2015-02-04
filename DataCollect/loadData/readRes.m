@@ -8,6 +8,13 @@ function [index,motion] = readRes(path)
 RES_LENGTH = 33;                                    %the length of result segment               
 %path='F:\SNARC-work\康复\DATA\正常组\干汝起\右手\运动\1-2013-11-21 11-6-48\Result.txt'
 DATA = importdata(path); %load data
+if isempty(DATA)
+    disp('Warnning! Datafile is empty!.');
+    disp(path);
+    index=0;
+    motion='0';
+    return
+end
 mark = strcmp(DATA.textdata, '运动康复训练结果');     %mark the key location
 index = find(mark==1);
 if isempty(index)                                       %no evaluative result
