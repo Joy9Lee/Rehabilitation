@@ -20,15 +20,15 @@ end
 figure;
 for i=1:length(dataSetA.name)
     subplot(7,5,i)
-    plot(A(i).axisA{PART});
-    ylim([-1 1]);
+    plot(A(i).angA{PART}/90);
+    ylim([0 1]);
 end
 
 figure;
 for i=1:length(dataSetU.name)
     subplot(4,3,i)
-    plot(U(i).axisU{PART});
-    ylim([-1 1]);
+    plot(U(i).angU{PART}/90);
+    ylim([0 1]);
 end
 % Name={'Ñü','´ó±Û','Ð¡±Û','ÊÖ'}
 % for i=1:4

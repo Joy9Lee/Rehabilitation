@@ -2,13 +2,22 @@
 clear all
 close all
 clc
-oriPath='G:\SNARC\数据\正常组';
+oriPath='G:\SNARC\数据\患者组';
 nameList = dir(fullfile(oriPath));
+for s = 1:length(nameList)-2
+    DataA(s).name={};
+    DataA(s).affSide={};
+    DataA(s).R.flx.kin=[];
+    DataA(s).R.abd.kin=[];
+    DataA(s).L.flx.kin=[];
+    DataA(s).L.abd.kin=[];
+    
+end
 for n = 1:length(nameList)-2
     DataA(n).name=nameList(n+2).name;
     sideList=dir(fullfile(oriPath,nameList(n+2).name));
     for i=1:length(sideList)-2
-        if ~(isempty(findstr(sideList(i+2).name,'偏')) && isempty(findstr(sideList(i+2).name,'瘫'))&& isempty(findstr(sideList(i+2).name,'患')))
+        if ~(isempty(strfind(sideList(i+2).name,'偏')) && isempty(findstr(sideList(i+2).name,'瘫'))&& isempty(findstr(sideList(i+2).name,'患')))
             DataA(n).affSide=sideList(i+2).name(1);
         end
         if strcmp(sideList(i+2).name(1),'左')==1
@@ -39,7 +48,7 @@ for n = 1:length(nameList)-2
                 end
             end
             
-            if strcmp(typeList(j+2).name,'肌电')==1
+            if strcmp(typeList(j+2).name,'肌电1')==1
                 t=zeros(1,8)+1;
                 fileList=dir(fullfile(oriPath,nameList(n+2).name,sideList(i+2).name,typeList(j+2).name));
                 for l=1:length(fileList)-2

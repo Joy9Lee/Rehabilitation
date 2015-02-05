@@ -47,7 +47,7 @@ function index = stepDet(data)
 %The function is used to detection step point.
 % Input data is the detected vector.
 % Putput index is the index of the step point.
-THD = 0.5; %threshold
+THD = 0.05; %threshold
 index = 1;
 N = length(data);
 for i= 1:N-1
