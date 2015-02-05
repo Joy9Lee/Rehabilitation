@@ -2,9 +2,9 @@ close all;
 clear;
 clc;
 %%
-load('../DATA/dataSetA');
-load('../DATA/dataSetU');
-PART = 1;
+load('../DATA/34DataA');
+load('../DATA/11DataU');
+PART = 2;
 for i=1:length(dataSetA.name)
     for j=1:4
         [A(i).angA{j} A(i).axisA{j}]=quatfac(dataSetA.quat(i).limb{j});
@@ -19,16 +19,16 @@ end
 
 figure;
 for i=1:length(dataSetA.name)
-    subplot(6,4,i)
-    plot(A(i).angA{PART});
-    ylim([0 90]);
+    subplot(7,5,i)
+    plot(A(i).axisA{PART});
+    ylim([-1 1]);
 end
 
 figure;
 for i=1:length(dataSetU.name)
     subplot(4,3,i)
-    plot(U(i).angU{PART});
-    ylim([0 90]);
+    plot(U(i).axisU{PART});
+    ylim([-1 1]);
 end
 % Name={'Ñü','´ó±Û','Ð¡±Û','ÊÖ'}
 % for i=1:4
