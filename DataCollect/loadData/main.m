@@ -2,9 +2,11 @@
 clear all
 close all
 clc
-%oriPath='G:\SNARC\数据\患者组';
-oriPath='F:\SNARC-work\康复\DATA\患者组';
-[fmXls,nameXls] = xlsread('F:\SNARC-work\康复\DATA\profile.xlsx');
+Path = 'G:\SNARC\DATA\';
+%Path = 'F:\SNARC-work\康复\DATA\';
+oriPath=[Path '患者组'];
+[fmXls,nameXls] = xlsread([Path 'profile.xlsx']);
+%[fmXls,nameXls] = xlsread('F:\SNARC-work\康复\DATA\profile.xlsx');
 nameList = dir(fullfile(oriPath));
 EMGFLAG = 0;
 for s = 1:length(nameList)-2
@@ -72,7 +74,7 @@ for n = 1:length(nameList)-2          %traverse each person
                            DataA(n).R.flx.sEMG{t(4)}= loadEmg(pathE);
                             t(4)=t(4)+1;
                         elseif ~isempty(strfind(fileList(l+2).name,'motionR2')) 
-                           %DataA(n).R.abd.sEMG{t(5)}= loadEmg(pathE);
+                           DataA(n).R.abd.sEMG{t(5)}= loadEmg(pathE);
                             t(5)=t(5)+1;
                         elseif ~isempty(strfind(fileList(l+2).name,'mvcR1'))
                            DataA(n).R.flx.mvc{t(6)}= loadEmg(pathE);
