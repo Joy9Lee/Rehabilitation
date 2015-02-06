@@ -25,7 +25,8 @@ for i=1:length(dataSetA.name)
         subplot(8,5,i)
         plot(A(i).angA{PART}/90);
         ylim([0 1]);
-    end
+    end   
+    title(num2str(dataSetA(i).FM));
 end
 
 figure;
@@ -35,6 +36,7 @@ for i=1:length(dataSetA.name)
         plot(A(i).axisA{PART});
         ylim([-1 1]);
     end
+    title(num2str(dataSetA(i).FM));
 end
 
 
