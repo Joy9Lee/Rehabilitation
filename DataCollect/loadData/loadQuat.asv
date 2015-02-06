@@ -29,7 +29,7 @@ end
 quat = quatSeg(temp,index);
 clear temp;
 %segment the data whithout mark
-index2 = stepDet(quat(1).limb{2}(:,1));
+index2 = stepDet(quat(1).limb{2});
 if length(index2) > 2
    temp = quat(1);
    temp1 = quatSeg(temp,index2);
@@ -50,7 +50,7 @@ function index = stepDet(data)
 %The function is used to detection step point.
 % Input data is the detected vector.
 % Putput index is the index of the step point.
-THD = (max(data)-min(data))/2; %threshold
+THD = (max(data(:,2))-min(data))/2; %threshold
 index = 0;
 N = length(data);
 for i= 1:N-1
