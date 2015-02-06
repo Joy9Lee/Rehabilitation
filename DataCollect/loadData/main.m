@@ -64,7 +64,7 @@ for n = 1:length(nameList)-2
                            DataA(n).R.flx.sEMG{t(4)}= loadEmg(pathE);
                             t(4)=t(4)+1;
                         elseif ~isempty(strfind(fileList(l+2).name,'motionR2')) 
-                           %DataA(n).R.abd.sEMG{t(5)}= loadEmg(pathE);
+                           DataA(n).R.abd.sEMG{t(5)}= loadEmg(pathE);
                             t(5)=t(5)+1;
                         elseif ~isempty(strfind(fileList(l+2).name,'mvcR1'))
                            DataA(n).R.flx.mvc{t(6)}= loadEmg(pathE);
