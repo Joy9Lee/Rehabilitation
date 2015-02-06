@@ -27,6 +27,6 @@ else
     motion = str(regexp(str,'\d'));
     N = length(index);
     for i = 1:N                                         %caculate the index for quatnions files
-        index(i)=index(i)-RES_LENGTH*(i-1);
+        index(i)=index(i)-RES_LENGTH*(i-1)-1;
     end
 end

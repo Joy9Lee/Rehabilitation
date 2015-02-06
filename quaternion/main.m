@@ -1,14 +1,16 @@
 close all;
-clear;
-clc;
+% clear;
+% clc;
 %%
-load('../DATA/34DataA');
+% load('../DATA/testA');
 load('../DATA/11DataU');
 PART = 2;
 for i=1:length(dataSetA.name)
-    for j=1:4
-        [A(i).angA{j} A(i).axisA{j}]=quatfac(dataSetA.quat(i).limb{j});
-    end    
+    if ~isempty(dataSetA.quat(i).limb)
+        for j=1:4
+            [A(i).angA{j} A(i).axisA{j}]=quatfac(dataSetA.quat(i).limb{j});
+        end    
+    end
 end
 
 for i=1:length(dataSetU.name)
@@ -19,10 +21,22 @@ end
 
 figure;
 for i=1:length(dataSetA.name)
-    subplot(7,5,i)
-    plot(A(i).angA{PART}/90);
-    ylim([0 1]);
+    if ~isempty(dataSetA.quat(i).limb)
+        subplot(8,5,i)
+        plot(A(i).angA{PART}/90);
+        ylim([0 1]);
+    end
 end
+
+figure;
+for i=1:length(dataSetA.name)
+    if ~isempty(dataSetA.quat(i).limb)
+        subplot(8,5,i)
+        plot(A(i).axisA{PART});
+        ylim([-1 1]);
+    end
+end
+
 
 figure;
 for i=1:length(dataSetU.name)
@@ -30,6 +44,13 @@ for i=1:length(dataSetU.name)
     plot(U(i).angU{PART}/90);
     ylim([0 1]);
 end
+
+figure;
+for i=1:length(dataSetU.name)
+    subplot(4,3,i)
+    plot(U(i).axisU{PART});
+    ylim([-1 1]);
+end    
 % Name={'Ñü','´ó±Û','Ð¡±Û','ÊÖ'}
 % for i=1:4
 %     figure('Name', Name{i});
