@@ -10,6 +10,7 @@ affected=DataA;
 N = 3; %The Nth motion
 for i = 1:length(affected)
     dataSetA.name{i} = affected(i).name;
+    dataSetA.FM(i) = affected(i).FM;
     if ~isempty(affected(i).affSide) && affected(i).affSide=='ср'
         if ~isempty(affected(i).R.flx.kin)
 %            if length(affected(i).R.flx.kin) >= N    %Extract Nth motion
