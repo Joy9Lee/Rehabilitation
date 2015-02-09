@@ -8,7 +8,7 @@ oriPath=[Path '»¼Õß×é'];
 [fmXls,nameXls] = xlsread([Path 'profile.xlsx']);
 %[fmXls,nameXls] = xlsread('F:\SNARC-work\¿µ¸´\DATA\profile.xlsx');
 nameList = dir(fullfile(oriPath));
-EMGFLAG = 0;
+EMGFLAG = 1;
 for s = 1:length(nameList)-2
     DataA(s).name={};
     DataA(s).FM=NaN;
@@ -17,6 +17,14 @@ for s = 1:length(nameList)-2
     DataA(s).R.abd.kin=[];
     DataA(s).L.flx.kin=[];
     DataA(s).L.abd.kin=[];
+    DataA(s).R.flx.sEMG={};
+    DataA(s).R.abd.sEMG={};
+    DataA(s).L.flx.sEMG={};
+    DataA(s).L.abd.sEMG={};
+     DataA(s).R.flx.mvc={};
+    DataA(s).R.abd.mvc={};
+    DataA(s).L.flx.mvc={};
+    DataA(s).L.abd.mvc={};
 
 end
 for n = 1:length(nameList)-2          %traverse each person
@@ -65,33 +73,26 @@ for n = 1:length(nameList)-2          %traverse each person
                     pathE=fullfile(oriPath,nameList(n+2).name,sideList(i+2).name,typeList(j+2).name,fileList(l+2).name);
                    
                     if ~isempty(strfind(fileList(l+2).name,'motionL1')) 
-                           DataA(n).L.flx.sEMG{t(2)}= loadEmg(pathE);
-                           t(2)=t(2)+1;
+                           DataA(n).L.flx.sEMG=[DataA(n).L.flx.sEMG loadEmg(pathE)];
                         elseif ~isempty(strfind(fileList(l+2).name,'motionL2'))   
-                           DataA(n).L.abd.sEMG{t(3)}= loadEmg(pathE);
-                            t(3)=t(3)+1;
+                           DataA(n).L.abd.sEMG=[DataA(n).L.abd.sEMG loadEmg(pathE)];
                         elseif ~isempty(strfind(fileList(l+2).name,'motionR1')) 
-                           DataA(n).R.flx.sEMG{t(4)}= loadEmg(pathE);
-                            t(4)=t(4)+1;
+                           DataA(n).R.flx.sEMG=[DataA(n).R.flx.sEMG loadEmg(pathE)];
                         elseif ~isempty(strfind(fileList(l+2).name,'motionR2')) 
-                           DataA(n).R.abd.sEMG{t(5)}= loadEmg(pathE);
-                            t(5)=t(5)+1;
+                           DataA(n).R.abd.sEMG= [DataA(n).R.abd.sEMG loadEmg(pathE)];
                         elseif ~isempty(strfind(fileList(l+2).name,'mvcR1'))
-                           DataA(n).R.flx.mvc{t(6)}= loadEmg(pathE);
-                            t(6)=t(6)+1;
+                           DataA(n).R.flx.mvc= [DataA(n).R.flx.mvc loadEmg(pathE)];
                         elseif ~isempty(strfind(fileList(l+2).name,'mvcR2'))
-                           DataA(n).R.abd.mvc{t(7)}= loadEmg(pathE);
-                            t(7)=t(7)+1;
+                           DataA(n).R.abd.mvc=[DataA(n).R.abd.mvc loadEmg(pathE)];
                         elseif (strfind(fileList(l+2).name,'mvcL1'))
-                           DataA(n).L.flx.mvc{t(8)}= loadEmg(pathE);
-                            t(8)=t(8)+1;
+                           DataA(n).L.flx.mvc= [DataA(n).L.flx.mvc loadEmg(pathE)];
                         elseif (strfind(fileList(l+2).name,'mvcL2'))
-                           DataA(n).L.abd.mvc{t(1)}= loadEmg(pathE);
-                            t(1)=t(1)+1;
+                           DataA(n).L.abd.mvc= [DataA(n).L.abd.mvc loadEmg(pathE)]; 
                     end 
                 end
             end
                 
         end 
     end
+   
 end
