@@ -1,11 +1,12 @@
 %Load kinematic data in a array
-% clear;
-% clc;
-% close all;
-%file name, which is same as variable name.
-% load('../../DATA/newDataA');
-% load('../../DATA/newDataU');
+clear;
+clc;
+close all;
+% file name, which is same as variable name.
+load('../../DATA/DataA-35');
+load('../../DATA/DataU');
 affected=DataA;
+unaffected=DataU;
 % unaffected=newDataU;
 N = 3; %The Nth motion
 for i = 1:length(affected)
@@ -27,12 +28,13 @@ for i = 1:length(affected)
 end
 dataSetA.name = dataSetA.name';
 
-% for i = 1:length(unaffected)
-% %    if length(unaffected(i).R.flx) >= N      %Extract Nth motion
-%         dataSetU.name{i} = unaffected(i).name;  
-%         dataSetU.quat(i) = unaffected(i).R.flx.kin(1);
-%            
-% %    end
-% 
-% end
-% dataSetU.name = dataSetU.name';
+for i = 1:length(unaffected)
+%    if length(unaffected(i).R.flx) >= N      %Extract Nth motion
+        dataSetU.name{i} = unaffected(i).name;  
+        if ~isempty(unaffected(i).R.flx.kin)
+            dataSetU.quat(i) = unaffected(i).R.flx.kin(1);
+        end
+%    end
+
+end
+dataSetU.name = dataSetU.name';

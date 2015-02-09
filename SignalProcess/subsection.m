@@ -5,7 +5,7 @@ clear all
 %Input data is a MxN array
 
 fs=50;
-load('../DATA/quatA');
+load('../DATA/dataSetA');
 inData=dataSetA;
 win=6;
 %% IntoPart function
