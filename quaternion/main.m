@@ -2,8 +2,8 @@ close all;
 % clear;
 % clc;
 %%
-% load('../DATA/testA');
-load('../DATA/11DataU');
+load('../DATA/quatA');
+load('../DATA/quatU');
 PART = 2;
 for i=1:length(dataSetA.name)
     if ~isempty(dataSetA.quat(i).limb)
@@ -22,11 +22,11 @@ end
 figure;
 for i=1:length(dataSetA.name)
     if ~isempty(dataSetA.quat(i).limb)
-        subplot(8,5,i)
+        subplot(7,5,i)
         plot(A(i).angA{PART}/90);
         ylim([0 1]);
     end   
-    title(num2str(dataSetA(i).FM));
+    title(['FM=' num2str(dataSetA.FM(i))]);
 end
 
 figure;
@@ -36,7 +36,7 @@ for i=1:length(dataSetA.name)
         plot(A(i).axisA{PART});
         ylim([-1 1]);
     end
-    title(num2str(dataSetA(i).FM));
+    title(['FM=' num2str(dataSetA.FM(i))]);
 end
 
 

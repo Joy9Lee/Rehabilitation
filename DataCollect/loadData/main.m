@@ -2,8 +2,8 @@
 clear all
 close all
 clc
-Path = 'G:\SNARC\DATA\';
-%Path = 'F:\SNARC-work\¿µ¸´\DATA\';
+%Path = 'G:\SNARC\DATA\';
+Path = 'F:\SNARC-work\¿µ¸´\DATA\';
 oriPath=[Path '»¼Õß×é'];
 [fmXls,nameXls] = xlsread([Path 'profile.xlsx']);
 %[fmXls,nameXls] = xlsread('F:\SNARC-work\¿µ¸´\DATA\profile.xlsx');

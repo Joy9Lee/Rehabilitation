@@ -5,9 +5,8 @@ clear all
 %Input data is a MxN array
 
 fs=50;
-filePath='G:\SNARC\Rehabilitation\DATA\newDataU.mat';
-load(filePath);
-data=newDataU;
+load('../DATA/quatA');
+data=dataSetA;
 inData=data;
 win=6;
 %% IntoPart function
