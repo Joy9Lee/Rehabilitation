@@ -1,6 +1,6 @@
 function loc=LineSec(data,varargin)
 %Cut the data of a line into two parts, the varying part and the smooth
-%part
+%part, isometric and isotonic.
 %Input data is a 1xN array
 
 % filePath='G:\SNARC\Rehabilitation\DATA\newDataU.mat';

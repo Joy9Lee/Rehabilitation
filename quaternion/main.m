@@ -1,7 +1,6 @@
-function main()
-close all;
-% clear;
-% clc;
+% close all;
+clear;
+clc;
 %%
 load('../DATA/dataSetA');
 load('../DATA/dataSetU');
@@ -10,18 +9,25 @@ for i=1:length(dataSetA.name)
     if ~isempty(dataSetA.quat(i).limb)
         for j=1:4
             [A(i).angA{j} A(i).axisA{j}]=quatfac(dataSetA.quat(i).limb{j});
-%             index = markStart(A(i).angA{j});
-%             dataSetA.loc0(i)=index;
         end    
+        Sh.A.ang.ton{i}=A( i).angA{PART}(dataSetA.loc0(i) : dataSetA.loc1(i));
+        Sh.A.ang.met{i}=A(i).angA{PART}(dataSetA.loc1(i) : end);
+        Sh.A.axis.ton{i}=A(i).axisA{PART}(dataSetA.loc0(i) : dataSetA.loc1(i),:);
+        Sh.A.axis.met{i}=A(i).axisA{PART}(dataSetA.loc1(i) : end,:);
     end
 end
+
+Sh.A.FM = dataSetA.FM;
 
 for i=1:length(dataSetU.name)
     for j=1:4
         [U(i).angU{j} U(i).axisU{j}]=quatfac(dataSetU.quat(i).limb{j});
-%         index = markStart(U(i).angU{j});
-%         dataSetU.loc0(i)=index;
+
     end
+    Sh.U.ang.ton{i}=U(i).angU{PART}(dataSetU.loc0(i) : dataSetU.loc1(i));
+    Sh.U.ang.met{i}=U(i).angU{PART}(dataSetU.loc1(i) : end);
+    Sh.U.axis.ton{i}=U(i).axisU{PART}(dataSetU.loc0(i) : dataSetU.loc1(i),:);
+    Sh.U.axis.met{i}=U(i).axisU{PART}(dataSetU.loc1(i) : end,:);
 end
 
 figure;
@@ -30,7 +36,7 @@ for i=1:length(dataSetA.name)
         subplot(7,5,i)
         plot(A(i).angA{PART}/90);
         hold on;
-        plot([dataSetA.loc(i) dataSetA.loc(i)],[0 1],'--m');
+        plot([dataSetA.loc1(i) dataSetA.loc1(i)],[0 1],'--m');
         plot([dataSetA.loc0(i) dataSetA.loc0(i)],[0 1],'--k');
         ylim([0 1]);
     end   
@@ -43,7 +49,7 @@ for i=1:length(dataSetA.name)
         subplot(8,5,i)
         plot(A(i).axisA{PART});
         hold on;
-        plot([dataSetA.loc(i) dataSetA.loc(i)],[-1 1],'--m');
+        plot([dataSetA.loc1(i) dataSetA.loc1(i)],[-1 1],'--m');
         plot([dataSetA.loc0(i) dataSetA.loc0(i)],[-1 1],'--k');
         ylim([-1 1]);
     end
@@ -56,7 +62,7 @@ for i=1:length(dataSetU.name)
     subplot(4,3,i)
     plot(U(i).angU{PART}/90);
     hold on;
-    plot([dataSetU.loc(i) dataSetU.loc(i)],[0 1],'--m');
+    plot([dataSetU.loc1(i) dataSetU.loc1(i)],[0 1],'--m');
     plot([dataSetU.loc0(i) dataSetU.loc0(i)],[0 1],'--k');
     ylim([0 1]);
 end
@@ -66,7 +72,7 @@ for i=1:length(dataSetU.name)
     subplot(4,3,i)
     plot(U(i).axisU{PART});
     hold on;
-    plot([dataSetU.loc(i) dataSetU.loc(i)],[-1 1],'--m');
+    plot([dataSetU.loc1(i) dataSetU.loc1(i)],[-1 1],'--m');
     plot([dataSetU.loc0(i) dataSetU.loc0(i)],[-1 1],'--k');
     ylim([-1 1]);
 end    
@@ -89,12 +95,3 @@ end
 %     
 % end
 
-function index = markStart(ang)
-%mark the index of motion start
-for i = 1:length(ang)
-    index = 200;
-    if ang(i)>20
-       index = i;
-        break;
-    end
-end

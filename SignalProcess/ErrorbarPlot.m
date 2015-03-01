@@ -25,11 +25,11 @@ Sdata=[SdataA;SdataU]';
 %% calculate similarity
 for i=1:sA(1)
     if sA(1)==1
-        s=Similarity(dataA,dataU);
+        s=similarity(dataA,dataU);
        
         break
     end
-    s(i) = Similarity(inDataA(i,:),MdataU);
+    s(i) = similarity(inDataA(i,:),MdataU);
 end
 
 %% display bar figure
@@ -60,6 +60,8 @@ if Display
     legend(nameA,nameU,'*p<0.05   ')
 end
 end
+
+
 %{
 
 p=zeros(1,4);
