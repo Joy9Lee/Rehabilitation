@@ -7,12 +7,15 @@ function [loc0, loc]=subsection()
 %Input data is a MxN array
 
 fs=50;
-load('../DATA/dataSetA');
-inData=dataSetA;
+%load('../DATA/dataSetA');
+%inData=dataSetA;
+load('../DATA/synDataA');
+inData=synDataA;
 win=6;
 %% IntoPart function
 
 for i=1:length(inData.quat)
+    if ~isempty(inData.quat{i})
 
     N = size(inData.quat(i).limb{2});
     %mark the start index
@@ -21,7 +24,7 @@ for i=1:length(inData.quat)
     x(i,1) = LineSec(inData.quat(i).limb{2}(:,1));
     loc(i) = max(x(i,:));
 
-    
+    end
     
 end
 %Display

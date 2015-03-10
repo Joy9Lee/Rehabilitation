@@ -2,16 +2,19 @@
 clc
 close all
 clear all
-load('../DATA/dataSetA');
-load('../DATA/dataSetU');
+load('../DATA/synDataA');
+load('../DATA/synDataU');
 %% Affectd power ratio
 j=1;
-for i=1:length(dataSetA.sEMG)
-    if ~isempty(dataSetA.sEMG{i})
-        dataA.EMG{j}=CiEMG(dataSetA.sEMG{i},20);
-        dataA.FM(j)=dataSetA.FM(i);
-        dataA.loc1(j)=dataSetA.loc1(i);
-        dataA.EMGT{j}=dataA.EMG{j}(dataA.loc1(j)+1:end,:);
+indataA=synDataA;
+indataU=synDataU;
+for i=1:length(indataA.sEMG)
+    if ~isempty(indataA.sEMG{i})
+        dataA.EMG{j}=CiEMG(indataA.sEMG{i},20);
+        dataA.FM(j)=indataA.FM(i);
+        dataA.quat(j)=indataA.quat(i);
+%         dataA.loc1(j)=indataA.loc1(i);
+%         dataA.EMGT{j}=dataA.EMG{j}(dataA.loc1(j)+1:end,:);
         j=j+1;
     end
 end
@@ -21,10 +24,11 @@ pRatioA=PowerRatio(dataA.EMG);
 
 %% Unaffected power ratio
 j=1;
-for i=1:length(dataSetU.sEMG)
-    if ~isempty(dataSetU.sEMG{i})
-        dataU.EMG{j}=CiEMG(dataSetU.sEMG{i},20);
-        dataU.loc1(j)=dataSetU.loc1(i);
+for i=1:length(indataU.sEMG)
+    if ~isempty(indataU.sEMG{i})
+        dataU.EMG{j}=CiEMG(indataU.sEMG{i},20);
+         dataU.quat(j)=indataU.quat(i);
+%         dataU.loc1(j)=indataU.loc1(i);
         %dataU.EMGT{j}=dataU.EMG{j}(dataU.loc1(j)+1:end,:);
         j=j+1;
     end
@@ -39,7 +43,7 @@ pRatioU=PowerRatio(dataU.EMG);
 
 [Mdata,Sdata,s,p]=ErrorbarPlot(pRatioA,'Affected',pRatioU,'Unaffected',1);
 r=pRatioA(:,3)./pRatioA(:,2);           %ratio of muscle3 to muscle2
-mycorr(dataA.FM,r',1)
+%mycorr(dataA.FM,r',1)
 figure
 bar(r)
 MdataU=mean(pRatioU);
