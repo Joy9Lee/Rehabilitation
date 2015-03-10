@@ -9,7 +9,7 @@ N=length(data);
 for i=1:N
     inData=data{i};
     s=size(inData);
-    AllPower(i,:)=sum(sum(inData));
+    AllPower(i,:)=sum(sum(abs(inData)));
     for j=1:s(2)
         PwRatio(i,j)= sum(inData(:,j))./ AllPower(i,:);
        

@@ -24,7 +24,8 @@ y1=polyval(po,x1);
 plot(data1,data2,'*',x1,y1);
 r1=num2str(r1');
 p1=num2str(p');
-s1=strcat('N=16','   R=',r1,'   P=',p1);
+N1=num2str(N1');
+s1=strcat('N=',N1,'   R=',r1,'   P=',p1);
 
 xlabel('Fugl-Meyer Score');
 ylabel('激励模式相似度');

@@ -2,9 +2,9 @@
 clear all
 close all
 clc
-%Path = 'G:\SNARC\DATA\';
-Path = 'F:\SNARC-work\康复\DATA\';
-oriPath=[Path '正常组'];
+Path = 'G:\SNARC\DATA\';
+%Path = 'F:\SNARC-work\康复\DATA\';
+oriPath=[Path '患者组'];
 [fmXls,nameXls] = xlsread([Path 'profile.xlsx']);
 %[fmXls,nameXls] = xlsread('F:\SNARC-work\康复\DATA\profile.xlsx');
 nameList = dir(fullfile(oriPath));

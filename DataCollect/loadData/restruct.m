@@ -3,8 +3,8 @@ clear;
 clc;
 close all;
 % file name, which is same as variable name.
-load('../../DATA/DataA-35');
-load('../../DATA/DataU');
+load('../../DATA/backup/DataA-35');
+load('../../DATA/backup/DataU-11');
 affected=DataA;
 unaffected=DataU;
 % unaffected=newDataU;

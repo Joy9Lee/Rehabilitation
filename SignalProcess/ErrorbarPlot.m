@@ -16,8 +16,8 @@ sU=size(dataU);
 inDataA=dataA;
 inDataU=dataU;
 MdataA=mean(inDataA);
-SdataA=std(inDataA,1);
 MdataU=mean(inDataU);
+SdataA=std(inDataA,1);
 SdataU=std(inDataU,1);
 Mdata=[MdataA;MdataU]';
 Sdata=[SdataA;SdataU]';
@@ -35,7 +35,7 @@ end
 %% display bar figure
 if Display
     if sA(2)==1
-        o=1
+      
         figure
         bar(Mdata,0.5,'c')
         hold on
@@ -55,7 +55,7 @@ if Display
         end
     end
     errorbar(x,Mdata,Sdata,'k','LineStyle','none');  
-    set(gca,'XTickLabel',{'斜方肌','三角肌前组','肱二头肌','肱三头肌'})
+    set(gca,'XTickLabel',{'胸大肌';'斜方肌';'三角肌前组';'三角肌中组';'肱二头肌';'肱三头肌';'肱桡机'})
     %ylabel('Power Ratio')
     legend(nameA,nameU,'*p<0.05   ')
 end
