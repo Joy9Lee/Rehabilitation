@@ -17,11 +17,16 @@ N2=length(data2);
 if Display
 figure
 plot(data1,data2,'*')
+for i= 1:length(data1)
+    text(data1(i)+var(data1)/1000,data2(i)+var(data2)/1000,num2str(i))
+end
 hold on
 po=polyfit(data1,data2,1);
 x1=linspace(min(data1),max(data1));
 y1=polyval(po,x1);
 plot(data1,data2,'*',x1,y1);
+r = eval(vpa(r,2));
+p = eval(vpa(p,2));
 r1=num2str(r);
 p1=num2str(p);
 % s1=strcat('N=16','   R=',r1,'   P=',p1);

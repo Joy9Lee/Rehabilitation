@@ -1,44 +1,35 @@
-function [Mdata,Sdata,p1]=diffAnaly(dataS,nameS,dataM,nameM,dataU,nameU,label,varargin)
+function [Mdata,Sdata,p1]=diffAnaly(dataA,nameA,dataU,nameU,label,varargin)
 %plot the errorbar of data
 %return mean,standard and similarity between affected and mean value
 
 %% reload function
-error(nargchk(7,8,nargin));
-if nargin ==8 && varargin{1}==1
+error(nargchk(5,6,nargin));
+if nargin ==6 && varargin{1}==1
     Display = 1;
 else
     Display = 0;
 end
 
 %% calculate the mean value and standard error 
-sS=size(dataS);
-sM=size(dataM);
+sA=size(dataA);
 sU=size(dataU);
-MdataS=mean(dataS);
-SdataS=std(dataS,1);
-MdataM=mean(dataM);
-SdataM=std(dataM,1);
+MdataA=mean(dataA);
+SdataA=std(dataA,1);
 MdataU=mean(dataU);
 SdataU=std(dataU,1);
-Mdata=[MdataS;MdataM;MdataU];
-Sdata=[SdataS;SdataM;SdataU];
+Mdata=[MdataA;MdataU];
+Sdata=[SdataA;SdataU];
 %% display bar figure
 if Display
     figure
     bar(Mdata,0.5,'c')
     hold on
     errorbar(Mdata,Sdata,'k','LineStyle','none'); 
-    set(gca,'XTickLabel',{nameS,nameM,nameU})
-    [h,p1]=ttest2(dataS,dataM);
-    [h,p2]=ttest2(dataM,dataU);
-    [h,p3]=ttest2(dataS,dataU);
+    set(gca,'XTickLabel',{nameA,nameU})
+    [h,p1]=ttest2(dataA,dataU);
     p1 = eval(vpa(p1,2));
-    p2 = eval(vpa(p2,2));
-    p3 = eval(vpa(p3,2));
     p1=num2str(p1);
-    p2=num2str(p2);
-    p3=num2str(p3);
-    title(['p1=' p1 '   p2=' p2 '   p3=' p3]);
+    title(['P=' p1]);
     ylabel(label);
 end
 end
