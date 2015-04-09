@@ -27,7 +27,7 @@ if Display
 end
 
 EMG=abs(EMG);
-L_iEMG=floor(length(EMG)/Tw)-1;
+L_iEMG=floor(length(EMG)/Tw);
 iEMG=zeros(L_iEMG,7);
 for i=1:L_iEMG
     iEMG(i,:)=sum(EMG(Tw*(i-1)+1:Tw*i,:),1);

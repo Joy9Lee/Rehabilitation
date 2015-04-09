@@ -57,6 +57,7 @@ if Display
     errorbar(x,Mdata,Sdata,'k','LineStyle','none');  
     set(gca,'XTickLabel',{'胸大肌';'斜方肌';'三角肌前组';'三角肌中组';'肱二头肌';'肱三头肌';'肱桡机'})
     %ylabel('Power Ratio')
+    ylabel('募集百分比%')
     legend(nameA,nameU,'*p<0.05   ')
 end
 end

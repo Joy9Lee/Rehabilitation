@@ -1,21 +1,27 @@
-function [loc0, loc]=subsection()
+function [loc0, loc]=subsection(dataPath,dataName,varargin)
 % clc
 % close all
 % clear all
 %Cut the each row or column of the input array into two parts, the varying
 %part and the smooth part, isometric and isotonic.
 %Input data is a MxN array
-
+error(nargchk(2,3,nargin));
+if nargin ==3 && varargin{1}==1
+    Display = 1;
+else
+    Display = 0;
+end
 fs=50;
 %load('../DATA/dataSetA');
 %inData=dataSetA;
-load('../DATA/synDataA');
-inData=synDataA;
+%load('../DATA/SynDataA');
+load(dataPath);
+inData=dataName;
 win=6;
 %% IntoPart function
 
 for i=1:length(inData.quat)
-    if ~isempty(inData.quat{i})
+    %if ~isempty(inData.quat{i})
 
     N = size(inData.quat(i).limb{2});
     %mark the start index
@@ -24,11 +30,11 @@ for i=1:length(inData.quat)
     x(i,1) = LineSec(inData.quat(i).limb{2}(:,1));
     loc(i) = max(x(i,:));
 
-    end
+    %end
     
 end
 %Display
-if 1
+if Display
     figure
     for i=1:length(inData.quat)
         subplot(7,5,i)

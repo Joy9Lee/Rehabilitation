@@ -28,7 +28,7 @@ N1=num2str(N1');
 s1=strcat('N=',N1,'   R=',r1,'   P=',p1);
 
 xlabel('Fugl-Meyer Score');
-ylabel('激励模式相似度');
+ylabel('募集模式相似度');
 title(s1);
 
 end
