@@ -43,11 +43,11 @@ meanU =meanU';
 % varA([4 5 33]) = [4.3 4.5 4.8];
 % axisA([5 33]) = [0.001 0.0015];
 % jerkU = jerkU';
-[Mdata,Sdata,p] = diffAnaly2(meanA,'Affect',meanU,'Unaffect','最大维持角度',1);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',meanA,'维持角度',1);
+[Mdata,Sdata,p] = diffAnaly2(meanA,'Affect',meanU,'Unaffect','最大活动关节角度',1);
+[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',meanA,'最大活动关节角度',1);
 [Mdata,Sdata,p] = diffAnaly(log(axisA(seve)),'Severely',log(axisA(mild)),'Mildly',log(axisU),'Unaffect','等长收缩旋转轴平稳度',1);
 [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(axisA),'角度方差',1);
-[Mdata,Sdata,p] = diffAnaly(log(varA(seve)),'Severely',log(varA(mild)),'Mildly',log(varU),'等长收缩角度平稳度','Unaffect',1);
+[Mdata,Sdata,p] = diffAnaly(log(varA(seve)),'Severely',log(varA(mild)),'Mildly',log(varU),'Unaffect','等长收缩角度平稳度',1);
 [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(varA),'旋转轴方差',1);
 
 %% isotonic analysis
