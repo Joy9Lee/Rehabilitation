@@ -4,8 +4,8 @@ clear;
 clc;
 addpath('../signalProcess')
 load('../DATA/Sh');
-
-
+load('../DATA/Tru');
+Display = 1;
 %% divide mildly set and severely set of affect
 seve = [];
 mild = [];
@@ -16,11 +16,27 @@ for i =1 : size(Sh.A.FM)
         mild = [mild i];
     end
 end
+
+%%Tru_balance
+for i=1:length(Tru.A)
+    TvarA(i) = var(Tru.A{i});
+end
+
+for i = 1:length(Tru.U)
+    varU(i) = var(Tru.U{i});
+end
+TvarA = TvarA';
+varU = varU';
+[Mdata,Sdata,p] = diffAnaly(log(TvarA(seve)),'Severely',log(TvarA(mild)),'Mildly',log(varU),'Control','躯干平稳度',Display);
+[Mdata,Sdata,p] = diffAnaly2(log(TvarA),'Affect',log(varU),'Control','躯干平稳度',Display);
+[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(TvarA),'躯干平衡度',Display);
+
 %% isometic analysis
 for i=1:length(Sh.A.ang.met)
     meanA(i) = mean(Sh.A.ang.met{i});
     varA(i) = var(Sh.A.ang.met{i});
     axisA(i) = mean(var(Sh.A.axis.met{i}));
+%     axisA(i) = mean(var([Sh.A.axis.met{i} Sh.A.ang.met{i}./100]));
 %     jerkA(i) = mean(abs(diff(Sh.A.ang.met{i},3)));
 end
 meanA =meanA';
@@ -43,12 +59,12 @@ meanU =meanU';
 % varA([4 5 33]) = [4.3 4.5 4.8];
 % axisA([5 33]) = [0.001 0.0015];
 % jerkU = jerkU';
-[Mdata,Sdata,p] = diffAnaly2(meanA,'Affect',meanU,'Unaffect','最大活动关节角度',1);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',meanA,'最大活动关节角度',1);
-[Mdata,Sdata,p] = diffAnaly(log(axisA(seve)),'Severely',log(axisA(mild)),'Mildly',log(axisU),'Unaffect','等长收缩旋转轴平稳度',1);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(axisA),'角度方差',1);
-[Mdata,Sdata,p] = diffAnaly(log(varA(seve)),'Severely',log(varA(mild)),'Mildly',log(varU),'Unaffect','等长收缩角度平稳度',1);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(varA),'旋转轴方差',1);
+[Mdata,Sdata,p] = diffAnaly2(meanA,'Affect',meanU,'Control','最大活动关节角度',Display);
+[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',meanA,'最大活动关节角度',Display);
+[Mdata,Sdata,p] = diffAnaly(log(axisA(seve)),'Severely',log(axisA(mild)),'Mildly',log(axisU),'Control','等长收缩旋转轴平稳度',Display);
+[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(axisA),'旋转轴方差',Display);
+[Mdata,Sdata,p] = diffAnaly(log(varA(seve)),'Severely',log(varA(mild)),'Mildly',log(varU),'Control','等长收缩角度平稳度',Display);
+[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(varA),'角度方差',Display);
 
 %% isotonic analysis
 for i=1:length(Sh.A.ang.ton)
@@ -150,14 +166,39 @@ JxUt = JxUt';
 % end 
 
 
-[Mdata,Sdata,p] = diffAnaly2(velocityA,'Affect',velocityU,'Unaffect','运动速率',1);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',velocityA,'运动速率',1);
-% [Mdata,Sdata,p] = diffAnaly(JxAt(seve),'Severely',JxAt(mild),'Mildly',JxUt,'Unaffect',1);
-[Mdata,Sdata,p] = diffAnaly2(log(JxAt),'Affect',log(JxUt),'Unaffect','运动平稳度',1);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(JxAt),'旋转轴平稳度',1);
-% [Mdata,Sdata,p] = diffAnaly2(log(jerkA/meanA(i)),'Affect',log(jerkU/meanU(i)),'Unaffect',1);
+[Mdata,Sdata,p] = diffAnaly2(velocityA,'Affect',velocityU,'Control','运动速率',Display);
+[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',velocityA,'运动速率',Display);
+% [Mdata,Sdata,p] = diffAnaly(JxAt(seve),'Severely',JxAt(mild),'Mildly',JxUt,'Control',1);
+[Mdata,Sdata,p] = diffAnaly2(log(JxAt),'Affect',log(JxUt),'Control','运动平稳度',Display);
+[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(JxAt),'旋转轴平稳度',Display);
+% [Mdata,Sdata,p] = diffAnaly2(log(jerkA/meanA(i)),'Affect',log(jerkU/meanU(i)),'Control',1);
 % [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(jerkA'/meanA(i)),'jerk',1);
 
+
+%% regression analysis
+n =35;
+index = rand(n,1);
+[a,b] = sort(index);
+% X = [meanA  log(axisA) log(varA) velocityA log(JxAt) log(TvarA)];
+X = [meanA  log(axisA) log(varA) velocityA log(JxAt) log(TvarA)];
+X = X(b,:);
+Y = Sh.A.FM(b,:);
+X1 = X(1:24,:);
+X2 = X(25:end,:);
+Y1 = Y(1:24,:);
+Y2 = Y(25:end);
+[ b , bint , r , rint , stats ]=regress ( Y , X ) ;
+figure;
+rcoplot(r,rint);
+figure;
+hist(r);
+xlabel('Residuals');
+ylabel('Frequency');
+title('Residual Hist');
+[r,p] = corrAnaly(Y,'Fugl-Meyer Score',Y+r,'Flexion FAS',1);
+% [r,p] = corrAnaly(Y1,'Fugl-Meyer评分',Y1+r,'训练集',0);
+% [r,p] = corrAnaly(Y2,'Fugl-Meyer评分',X2*b,'校验集',0);
+% error = sum(abs(Y2 - X2*b))/length(Y2);
 %% MD 
 % for i=1:length(angA)
 %     xi{i} = 1:length(angA{i});
@@ -266,7 +307,7 @@ JxUt = JxUt';
 % 
 % 
 % 
-% [Mdata,Sdata,p] = diffAnaly(log(varRedA(seve)),'Severely',log(varRedA(mild)),'mildly',log(varRedU),'Unaffect',1);
+% [Mdata,Sdata,p] = diffAnaly(log(varRedA(seve)),'Severely',log(varRedA(mild)),'mildly',log(varRedU),'Control',1);
 % [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(varRedA'),'var',1);
 %% envelope
 % for i=1:length(angA)

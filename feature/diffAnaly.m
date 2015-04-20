@@ -22,13 +22,7 @@ MdataU=mean(dataU);
 SdataU=std(dataU,1);
 Mdata=[MdataS;MdataM;MdataU];
 Sdata=[SdataS;SdataM;SdataU];
-%% display bar figure
-if Display
-    figure
-    bar(Mdata,0.5,'c')
-    hold on
-    errorbar(Mdata,Sdata,'k','LineStyle','none'); 
-    set(gca,'XTickLabel',{nameS,nameM,nameU})
+
     [h,p1]=ttest2(dataS,dataM);
     [h,p2]=ttest2(dataM,dataU);
     [h,p3]=ttest2(dataS,dataU);
@@ -38,6 +32,14 @@ if Display
     p1=num2str(p1);
     p2=num2str(p2);
     p3=num2str(p3);
+%% display bar figure
+if Display
+    figure
+    bar(Mdata,0.5,'c')
+    hold on
+    errorbar(Mdata,Sdata,'k','LineStyle','none'); 
+    set(gca,'XTickLabel',{nameS,nameM,nameU})
+
     title(['p1=' p1 '   p2=' p2 '   p3=' p3]);
     ylabel(label);
 end

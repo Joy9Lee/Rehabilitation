@@ -1,4 +1,4 @@
-function [loc0, loc]=subsection(dataPath,dataName,varargin)
+function [loc0, loc1]=subsection(dataPath,dataName,varargin)
 % clc
 % close all
 % clear all
@@ -28,7 +28,7 @@ for i=1:length(inData.quat)
     loc0(i) = markStart(inData.quat(i).limb{2}(:,1));
    %mark the index between the isometric and isotonic.
     x(i,1) = LineSec(inData.quat(i).limb{2}(:,1));
-    loc(i) = max(x(i,:));
+    loc1(i) = max(x(i,:));
 
     %end
     
@@ -40,7 +40,7 @@ if Display
         subplot(7,5,i)
         plot(inData.quat(i).limb{2}(:,1));
         hold on;
-        plot([loc(i) loc(i)],[0.8 1],'--m');
+        plot([loc1(i) loc1(i)],[0.8 1],'--m');
         plot([loc0(i) loc0(i)],[0.8 1],'--k');
         grid on;
     end
