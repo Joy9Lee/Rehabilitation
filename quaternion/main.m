@@ -3,24 +3,24 @@ clear;
 clc;
 %%
 load('../DATA/kineA');
+load('../DATA/kineUA');
 load('../DATA/kineU');
 PART = 2;
 %% glb2body 
-PART = 2;
+% PART = 2;
 % for i=1:length(kineA.name)
 %     for j=1:4
 % %         kineA.quat(i).limb{2}=quatdivide(kineA.quat(i).limb{1},kineA.quat(i).limb{2});
-%         kineA.quat(i).limb{2}=quatmultiply(quatinv(kineA.quat(i).limb{1}),kineA.quat(i).limb{2});
+%         kineA.quat(i).limb{2}=quatmultiply(quatinv(kineA.quat(i).limb{1}),(kineA.quat(i).limb{2}));
 %     end    
 % end
 % 
 % for i=1:length(kineU.name)
 %     for j=1:4
 % %         kineU.quat(i).limb{2}=quatdivide(kineU.quat(i).limb{1},kineU.quat(i).limb{2});
-%         kineU.quat(i).limb{2}=quatmultiply(quatinv(kineU.quat(i).limb{1}),kineU.quat(i).limb{2});
+%         kineA.quat(i).limb{2}=quatmultiply(quatinv(kineA.quat(i).limb{1}),(kineA.quat(i).limb{2}));
 %     end    
 % end
-
 %%
 for i=1:length(kineA.name)
     if ~isempty(kineA.quat(i).limb)
