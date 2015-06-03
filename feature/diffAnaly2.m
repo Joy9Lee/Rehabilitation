@@ -19,6 +19,11 @@ MdataU=mean(dataU);
 SdataU=std(dataU,1);
 Mdata=[MdataA;MdataU];
 Sdata=[SdataA;SdataU];
+
+[h,p1]=ttest2(dataA,dataU);
+p1 = eval(vpa(p1,2));
+p1=num2str(p1);
+    
 %% display bar figure
 if Display
     figure
@@ -26,9 +31,7 @@ if Display
     hold on
     errorbar(Mdata,Sdata,'k','LineStyle','none'); 
     set(gca,'XTickLabel',{nameA,nameU})
-    [h,p1]=ttest2(dataA,dataU);
-    p1 = eval(vpa(p1,2));
-    p1=num2str(p1);
+
     title(['P=' p1]);
     ylabel(label);
 end

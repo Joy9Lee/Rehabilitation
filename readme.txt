@@ -18,5 +18,10 @@ Flies:
 
 
 
+运动分析使用流程：
+
+DataA-35  ->restruct.m-> kineA ->subsection.m-> kineA ->quaternion/main.m-> Sh+Tru ->feature.m-> 
+DataU-11  ->restruct.m-> kineU ->subsection.m-> kineU ->quaternion/main.m-> Sh+Tru ->feature.m->
+
 
 

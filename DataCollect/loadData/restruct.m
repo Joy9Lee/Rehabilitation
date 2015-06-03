@@ -10,31 +10,31 @@ unaffected=DataU;
 % unaffected=newDataU;
 N = 3; %The Nth motion
 for i = 1:length(affected)
-    dataSetA.name{i} = affected(i).name;
-    dataSetA.FM(i) = affected(i).FM;
+    kineA.name{i} = affected(i).name;
+    kineA.FM(i) = affected(i).FM;
     if ~isempty(affected(i).affSide) && affected(i).affSide=='ср'
         if ~isempty(affected(i).R.flx.kin)
 %            if length(affected(i).R.flx.kin) >= N    %Extract Nth motion
-                dataSetA.quat(i) = affected(i).R.flx.kin(1);
+                kineA.quat(i) = affected(i).R.flx.kin(1);
             %end 
         end
     else
           if ~isempty(affected(i).L.flx.kin)
 %            if length(affected(i).L.flx.kin)>=N
-                dataSetA.quat(i) = affected(i).L.flx.kin(1);
+                kineA.quat(i) = affected(i).L.flx.kin(1);
 %             end
          end
     end
 end
-dataSetA.name = dataSetA.name';
+kineA.name = kineA.name';
 
 for i = 1:length(unaffected)
 %    if length(unaffected(i).R.flx) >= N      %Extract Nth motion
-        dataSetU.name{i} = unaffected(i).name;  
+        kineU.name{i} = unaffected(i).name;  
         if ~isempty(unaffected(i).R.flx.kin)
-            dataSetU.quat(i) = unaffected(i).R.flx.kin(1);
+            kineU.quat(i) = unaffected(i).R.flx.kin(1);
         end
 %    end
 
 end
-dataSetU.name = dataSetU.name';
+kineU.name = kineU.name';

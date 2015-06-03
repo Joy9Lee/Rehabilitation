@@ -1,7 +1,7 @@
 close all
 clear all
 clc
-load('../../DATA/SynDataA');
+load('../../DATA/SynDataA2');
 load('../../DATA/SynDataU');
 addpath('../../signalProcess')
 fs=50;
@@ -18,7 +18,7 @@ for i=1:length(indataA.EMG)
         SynDataA.ratioU{i}(:,m)=indataA.EMGU{i}(:,m)./mmvcU{i}(m)*100;
     end
     figure(1)
-    subplot(4,4,i)
+    subplot(5,4,i)
     plot(SynDataA.ratioA{i}(:,2:3))
     title(['FM=' num2str(indataA.FM(i))]);
     ylim([0 40])

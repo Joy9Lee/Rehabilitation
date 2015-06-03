@@ -1,10 +1,10 @@
-function [Mdata,Sdata,s,p]=ErrorbarPlot(dataA,nameA,dataU,nameU,varargin)
+function [Mdata,Sdata,s,p]=ErrorbarPlot(dataA,nameA,dataU,nameU,ylableName,varargin)
 %plot the errorbar of data
 %return mean,standard and similarity between affected and mean value
 
 %% reload function
-error(nargchk(4,5,nargin));
-if nargin ==5 && varargin{1}==1
+error(nargchk(5,6,nargin));
+if nargin ==6 && varargin{1}==1
     Display = 1;
 else
     Display = 0;
@@ -57,7 +57,7 @@ if Display
     errorbar(x,Mdata,Sdata,'k','LineStyle','none');  
     set(gca,'XTickLabel',{'胸大肌';'斜方肌';'三角肌前组';'三角肌中组';'肱二头肌';'肱三头肌';'肱桡机'})
     %ylabel('Power Ratio')
-    ylabel('募集百分比%')
+    ylabel(ylableName)
     legend(nameA,nameU,'*p<0.05   ')
 end
 end

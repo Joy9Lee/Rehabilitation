@@ -41,25 +41,28 @@ for i=1:length(indataU.EMG)
     %legend('2','3','4','5')
 end
 %% find loc
-[SynDataA.loc0, SynDataA.loc]=subsection('../../DATA/SynDataA',SynDataA);
+[SynDataA.loc0, SynDataA.loc]=subsection('../../DATA/SynDataA',SynDataA,1);
 SynDataA.loc0=SynDataA.loc0';
 SynDataA.loc=SynDataA.loc';
-[SynDataU.loc0, SynDataU.loc]=subsection('../../DATA/SynDataU',SynDataU);
+[SynDataU.loc0, SynDataU.loc]=subsection('../../DATA/SynDataU',SynDataU,1);
 SynDataU.loc0=SynDataU.loc0';
 SynDataU.loc=SynDataU.loc';
-
+SynDataA.loc(3)=50;
+SynDataA.loc(10)=50;
 %% save the holding part
 for i=1:length(indataA.EMG)
    % SynDataA.rT{i}=SynDataA.ratio{i}(SynDataA.loc(i):end,:);
-    rEMG{i}=CiEMG(SynDataA.EMG{i},20);
-   SynDataA.rT{i}=rEMG{i}(SynDataA.loc(i)+1:end,:);
+   SynDataA.synEMG{i}=CiEMG(SynDataA.EMG{i},20);
+   SynDataA.rT{i}=SynDataA.synEMG{i}(SynDataA.loc(i):end,:);
 end
+SynDataA.synEMG=SynDataA.synEMG';
 SynDataA.rT=SynDataA.rT';
 for i=1:length(indataU.EMG)
     %SynDataU.rT{i}=SynDataU.ratio{i}(SynDataU.loc(i):end,:);
-    rEMGU{i}=CiEMG(SynDataU.EMG{i},20);
-    SynDataU.rT{i}=rEMGU{i}(SynDataU.loc(i)+1:end,:);
+    SynDataU.synEMG{i}=CiEMG(SynDataU.EMG{i},20);
+    SynDataU.rT{i}=SynDataU.synEMG{i}(SynDataU.loc(i):end,:);
 end
+SynDataU.synEMG=SynDataU.synEMG';
 SynDataU.rT=SynDataU.rT';
 SynData1A.rT=SynDataA.rT(index);
 %% plot function
@@ -101,14 +104,21 @@ end
  mRatioU=[];
  for i=1:length(indataA.EMG)
      %mRatioA{i}=mean(SynDataA.rT{i}); 
-     mRatioA=[mRatioA;mean(SynDataA.rT{i})]; 
+     %mRatioA=[mRatioA;mean(SynDataA.rT{i})]; 
+     %mRatioA=[mRatioA;sum(SynDataA.rT{i})]; 
+     %mRatioA=[mRatioA;sum(SynDataA.synEMG{i})]; 
+    
     
  end
  for i=1:length(indataU.EMG)
-     mRatioU=[mRatioU;mean(SynDataU.rT{i})]; 
+     %mRatioU=[mRatioU;mean(SynDataU.rT{i})]; 
+     %mRatioU=[mRatioU;sum(SynDataU.rT{i})]; 
+     %mRatioU=[mRatioU;sum(SynDataU.synEMG{i})]; 
+    
  end
-
-    [Mdata,Sdata,s,p]=ErrorbarPlot(mRatioA,'Affected',mRatioU,'Unaffected',1);
+  mRatioA=PowerRatio(SynDataA.synEMG);
+ mRatioU=PowerRatio(SynDataU.synEMG);
+    [Mdata,Sdata,s,p]=ErrorbarPlot(mRatioA,'Affected',mRatioU,'Control','×÷¹¦±È',1);
 %% corr
 [r,p1]=mycorr(SynDataA.FM',s,1);
   

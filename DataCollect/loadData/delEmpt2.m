@@ -16,8 +16,8 @@ for i=1:length(indataA.sEMGU)
         dataA.FM(j)=indataA.FM(i);
         dataA.quatA(j)=indataA.quatA(i);
         dataA.quatU(j)=indataA.quatU(i);
-        dataA.EMGA{j}=CiEMG(indataA.sEMGA{i},20);
-        dataA.EMGU{j}=CiEMG(indataA.sEMGU{i},20);
+        dataA.EMGA{j}=indataA.sEMGA{i};
+        dataA.EMGU{j}=indataA.sEMGU{i};
         dataA.mvcA{j}=indataA.mvcA{i};
         dataA.mvcU{j}=indataA.mvcU{i};
         
@@ -38,7 +38,7 @@ for i=1:length(indataU.sEMG)
     if ~(isempty(indataU.sEMG{i}))
         dataU.name{j}=indataU.name(i);
         dataU.quat(j)=indataU.quat(i);
-        dataU.EMG{j}=CiEMG(indataU.sEMG{i},20);
+        dataU.EMG{j}=indataU.sEMG{i};
         dataU.mvc{j}=indataU.mvc{i}; 
         j=j+1;
     end

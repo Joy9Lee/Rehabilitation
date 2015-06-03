@@ -13,10 +13,10 @@ N = 3; %The Nth motion
 for i = 1:length(affected)
     
    
-    kA{i}={};
-    eA{i}={};
-    kU{i}={};
-    eU{i}={};
+    kA{i}={};               %length of affected kinemic data
+    eA{i}={};               %length of affected EMG data
+    kU{i}={};               %length of unaffected kinemic data
+    eU{i}={};               %length of unaffected EMG data
     if ~isempty(affected(i).affSide) && affected(i).affSide=='ср'
         if ~(isempty(affected(i).R.flx.kin) || isempty(affected(i).R.flx.sEMG))
             for t=1:length(affected(i).R.flx.kin) 
@@ -60,7 +60,8 @@ end
 for i = 1:length(affected)
     d{i}={};
     if ~isempty(affected(i).affSide) && affected(i).affSide=='ср'
-        if ~(isempty(affected(i).R.flx.kin) || isempty(affected(i).R.flx.sEMG)|| isempty(affected(i).R.flx.mvc))
+        %if ~(isempty(affected(i).R.flx.kin) || isempty(affected(i).R.flx.sEMG)|| isempty(affected(i).R.flx.mvc))
+        if ~(isempty(affected(i).R.flx.kin) || isempty(affected(i).R.flx.sEMG))
             for h=1:length(kA{i})
                 for g=1:length(eA{i})
                     d{i}=[d{i} kA{i}{h}*20-eA{i}{g}];
@@ -75,7 +76,8 @@ for i = 1:length(affected)
                     end
                 end
             end
-            if ~(isempty(affected(i).L.flx.kin) || isempty(affected(i).L.flx.sEMG)|| isempty(affected(i).L.flx.mvc))
+            %if ~(isempty(affected(i).L.flx.kin) || isempty(affected(i).L.flx.sEMG)|| isempty(affected(i).L.flx.mvc))
+             if ~(isempty(affected(i).L.flx.kin) || isempty(affected(i).L.flx.sEMG))
                 for h=1:length(kU{i})
                     for g=1:length(eU{i})
                         if abs(kU{i}{h}*20-eU{i}{g})<40                     
@@ -134,6 +136,8 @@ synDataA.mvcU = synDataA.mvcU';
 synDataA.sEMGU = synDataA.sEMGU';
 synDataA.quatA=synDataA.quatA';
 synDataA.quatU=synDataA.quatU';
+kA=kA';
+
 for i = 1:length(unaffected)
 %    if length(unaffected(i).R.flx) >= N      %Extract Nth motion
     kA{i}={};
@@ -166,7 +170,7 @@ for i = 1:length(unaffected)
         end
     end
 end
-
+kA=kA';
 
 % for i = 1:length(unaffected)
 % %    if length(unaffected(i).R.flx) >= N      %Extract Nth motion
