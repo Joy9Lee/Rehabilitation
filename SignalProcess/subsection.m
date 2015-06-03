@@ -1,3 +1,7 @@
+<<<<<<< HEAD:SignalProcess/subsection.m
+=======
+%function [loc0, loc1]=subsection(dataPath,dataName,varargin)
+>>>>>>> 71d8a58c36b86ee2c88f4c01568b9b60eeb6eca4:SignalProcess/subsection.m
 function [loc0, loc1]=subsection(dataPath,dataName,varargin)
 % clc
 % close all
@@ -21,16 +25,25 @@ win=6;
 %% IntoPart function
 
 for i=1:length(inData.quat)
-    %if ~isempty(inData.quat{i})
+%     if ~isempty(inData.quat{i})
 
+<<<<<<< HEAD:SignalProcess/subsection.m
     N = size(inData.quat(i).limb{2});
     %mark the start index
     loc0(i) = markStart(inData.quat(i).limb{2}(:,1));
    %mark the index between the isometric and isotonic.
     x(i,1) = LineSec(inData.quat(i).limb{2}(:,1));
     loc1(i) = max(x(i,:));
+=======
+        N = size(inData.quat(i).limb{2});
+        %mark the start index
+        loc0(i) = markStart(inData.quat(i).limb{2}(:,1));
+       %mark the index between the isometric and isotonic.
+        x(i,1) = LineSec(inData.quat(i).limb{2}(:,1));
+        loc1(i) = max(x(i,:));
+>>>>>>> 71d8a58c36b86ee2c88f4c01568b9b60eeb6eca4:SignalProcess/subsection.m
 
-    %end
+%     end
     
 end
 %Display
@@ -45,7 +58,9 @@ if Display
         grid on;
     end
 end
-
+inData.loc0 = loc0;
+inData.loc1 = loc1;
+x=1;
 function index = markStart(scale)
 %mark the index of motion start
 for i = 1:length(scale)
