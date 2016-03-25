@@ -50,8 +50,8 @@ for i=1:length(SynDataA.EMGA)
 end
 % figure(1)
 % legend('2','3')
-for i=1:length(SynDataU.EMG)
-    iEMGC{i}=CiEMG(SynDataU.EMG{i},200);
+for i=1:length(SynDataU.EMGR)
+    iEMGC{i}=CiEMG(SynDataU.EMGR{i},200);
     rC{i}=iEMGC{i}(:,3)./iEMGC{i}(:,2);
     r1C{i}=iEMGC{i}(:,5)./iEMGC{i}(:,6);
     meanC(i)=mean(rC{i});

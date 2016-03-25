@@ -24,6 +24,6 @@ for i = 1:length(Tru.U)
 end
 varA = varA';
 varU = varU';
-[Mdata,Sdata,p] = diffAnaly(log(varA(seve)),'Severely',log(varA(mild)),'Mildly',log(varU),'Unaffect','躯干平稳度',1);
-[Mdata,Sdata,p] = diffAnaly2(log(varA),'Affect',log(varU),'Unaffect','躯干平稳度',1);
+[Mdata,Sdata,p] = diffAnaly2(log(varA(seve)),'Severely',log(varA(mild)),'Mildly',log(varU),'Unaffect','躯干平稳度',1);
+[Mdata,Sdata,p] = diffAnaly(log(varA),'Affect',log(varU),'Unaffect','躯干平稳度',1);
 [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(varA),'躯干平衡度',1);

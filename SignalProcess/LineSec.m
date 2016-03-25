@@ -44,10 +44,12 @@ end
 loc=x;
 %% Display
 if Display
+    
 subplot(3,1,1)
     plot(data)
-    plot([loc loc],[min(data),max(data)],'--m');
     hold on;
+    plot([loc loc],[min(data),max(data)],'--m');
+    
     plot(x,y,'c');
     subplot(3,1,2)
     plot(d1);

@@ -19,7 +19,7 @@ data1=SigPre(data1);
 [H1,R1]=EMS(data1,N);
 %data2=abs(data2);
 data2=SigPre(data2);
-[H2,R2]=EMS(data2,N);
+[H2,R2]=EMS(data2,N,'d');
 
 %data=datablock1.data;
 %dlmread('wnn-motionL1-1.ASC','%d',']')

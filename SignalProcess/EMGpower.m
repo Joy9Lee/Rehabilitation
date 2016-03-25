@@ -7,8 +7,8 @@ load('../DATA/synDataU');
 %addpath('../../signalProcess')
 %% Affectd power ratio
 j=1;
-indataA=synDataA;
-indataU=synDataU;
+indataA=SynDataA;
+indataU=SynDataU;
 for i=1:length(indataA.sEMGA)
     if ~isempty(indataA.sEMGA{i})
         dataA.EMG{j}=CiEMG(indataA.sEMGA{i},20);

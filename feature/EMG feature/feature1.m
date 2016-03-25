@@ -116,9 +116,9 @@ end
      %mRatioU=[mRatioU;sum(SynDataU.synEMG{i})]; 
     
  end
-  mRatioA=PowerRatio(SynDataA.synEMG);
- mRatioU=PowerRatio(SynDataU.synEMG);
-    [Mdata,Sdata,s,p]=ErrorbarPlot(mRatioA,'Affected',mRatioU,'Control','作功比',1);
+mRatioA=PowerRatio(SynDataA.synEMG);
+mRatioU=PowerRatio(SynDataU.synEMG);
+[Mdata,Sdata,s,p]=ErrorbarPlot(mRatioA,'Affected',mRatioU,'Control','作功比',1);
 %% corr
 [r,p1]=mycorr(SynDataA.FM',s,1);
   

@@ -3,8 +3,10 @@ close all;
 clear;
 clc;
 addpath('../signalProcess')
-load('../DATA/Sh');
-load('../DATA/Tru');
+% load('../DATA/Sh3925');
+% load('../DATA/Tru3925');
+load('../DATA/ShUL3925');
+load('../DATA/TruUL3925');
 Display = 1;
 %% divide mildly set and severely set of affect
 seve = [];
@@ -23,35 +25,42 @@ for i=1:length(Tru.A)
 end
 
 for i = 1:length(Tru.U)
-    varU(i) = var(Tru.U{i});
+    TvarU(i) = var(Tru.U{i});
 end
 TvarA = TvarA';
-varU = varU';
-[Mdata,Sdata,p] = diffAnaly(log(TvarA(seve)),'Severely',log(TvarA(mild)),'Mildly',log(varU),'Control','躯干平稳度',Display);
-[Mdata,Sdata,p] = diffAnaly2(log(TvarA),'Affect',log(varU),'Control','躯干平稳度',Display);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(TvarA),'躯干平衡度',Display);
+TvarU = TvarU';
+% % % [Mdata,Sdata,p] = diffAnaly2(log(TvarA(seve)),'Severely',log(TvarA(mild)),'Mildly',log(TvarU),'Control','躯干平稳度',Display);
+% % % [Mdata,Sdata,p] = diffAnaly(log(TvarA),'Affect',log(TvarU),'Control','躯干平稳度',Display);
+% % % [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(TvarA),'躯干平衡度',Display);
 
 %% isometic analysis
 for i=1:length(Sh.A.ang.met)
+    if ~isempty(Sh.A.ang.met{i})
     meanA(i) = mean(Sh.A.ang.met{i});
     varA(i) = var(Sh.A.ang.met{i});
     axisA(i) = mean(var(Sh.A.axis.met{i}));
 %     axisA(i) = mean(var([Sh.A.axis.met{i} Sh.A.ang.met{i}./100]));
 %     jerkA(i) = mean(abs(diff(Sh.A.ang.met{i},3)));
+    end
 end
 meanA =meanA';
 varA = varA';
 axisA = axisA';
+
+
 % stableA=(varA./meanA);
 
 for i=1:length(Sh.U.ang.met)
+     if ~isempty(Sh.U.ang.met{i})
     meanU(i) = mean(Sh.U.ang.met{i});
     varU(i) = var(Sh.U.ang.met{i});
     axisU(i) = mean(var(Sh.U.axis.met{i}));
 %     jerkU(i) = mean(abs(diff(Sh.U.ang.met{i},3)));
+     end
 end
 varU=varU';
 meanU =meanU';
+axisU = axisU';
 % jerkA = jerkA';
 % stableU = (varU./meanU);
 
@@ -59,39 +68,49 @@ meanU =meanU';
 % varA([4 5 33]) = [4.3 4.5 4.8];
 % axisA([5 33]) = [0.001 0.0015];
 % jerkU = jerkU';
-[Mdata,Sdata,p] = diffAnaly2(meanA,'Affect',meanU,'Control','最大活动关节角度',Display);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',meanA,'最大活动关节角度',Display);
-[Mdata,Sdata,p] = diffAnaly(log(axisA(seve)),'Severely',log(axisA(mild)),'Mildly',log(axisU),'Control','等长收缩旋转轴平稳度',Display);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(axisA),'旋转轴方差',Display);
-[Mdata,Sdata,p] = diffAnaly(log(varA(seve)),'Severely',log(varA(mild)),'Mildly',log(varU),'Control','等长收缩角度平稳度',Display);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(varA),'角度方差',Display);
+% % % [Mdata,Sdata,p] = diffAnaly(meanA,'Affect',meanU,'Control','最大活动关节角度',Display);
+% % % [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',meanA,'最大活动关节角度',Display);
+% % % [Mdata,Sdata,p] = diffAnaly2(log(axisA(seve)),'Severely',log(axisA(mild)),'Mildly',log(axisU),'Control','等长收缩旋转轴平稳度',Display);
+% % % [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(axisA),'旋转轴方差',Display);
+% % % [Mdata,Sdata,p] = diffAnaly2(log(varA(seve)),'Severely',log(varA(mild)),'Mildly',log(varU),'Control','等长收缩角度平稳度',Display);
+% % % [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(varA),'角度方差',Display);
 
 %% isotonic analysis
 for i=1:length(Sh.A.ang.ton)
+     if ~isempty(Sh.A.ang.met{i})
     velocityA(i) = meanA(i)/length(Sh.A.ang.ton);
     angA{i} = Sh.A.ang.ton{i};
     jerkA(i) = mean(abs(diff(angA{i},3)));
-
+     end
 end
 
 for i=1:length(angA)
+     if ~isempty(Sh.A.ang.met{i})
     xi1{i} = 1:length(Sh.A.axis.ton{i}(:,1));
     fit1{i}=polyfit(xi1{i}',Sh.A.axis.ton{i}(:,1),8);  
     yi1{i}=polyval(fit1{i},xi1{i});
+     end
 end
 
 for i=1:length(angA)
+     if ~isempty(Sh.A.ang.met{i})
     xi2{i} = 1:length(Sh.A.axis.ton{i}(:,2));
     fit2{i}=polyfit(xi2{i}',Sh.A.axis.ton{i}(:,2),8);  
     yi2{i}=polyval(fit2{i},xi2{i});
+     end
 end
 for i=1:length(angA)
+     if ~isempty(Sh.A.ang.met{i})
     xi3{i} = 1:length(Sh.A.axis.ton{i}(:,3));
     fit3{i}=polyfit(xi3{i}',Sh.A.axis.ton{i}(:,3),8);  
     yi3{i}=polyval(fit3{i},xi3{i});
+     end
 end
 for i=1:length(angA)
+     if ~isempty(Sh.A.ang.met{i})
     JxAt(i) =  mean(abs(Sh.A.axis.ton{i}(:,1)-yi1{i}'))+mean(abs(Sh.A.axis.ton{i}(:,2)-yi2{i}'))+mean(abs(Sh.A.axis.ton{i}(:,3)-yi3{i}'));
+
+     end
 end
 
 %%One of the aixs fit condition
@@ -117,31 +136,40 @@ velocityA = velocityA';
 JxAt = JxAt';
 % jerkA = jerkA';
 for i=1:length(Sh.U.ang.ton)
+     if ~isempty(Sh.U.ang.met{i})
     velocityU(i) = meanU(i)/length(Sh.U.ang.ton);
     angU{i} = Sh.U.ang.ton{i};
     jerkU(i) = mean(abs(diff(angU{i},3)));
-
+     end
 end
 
 
 for i=1:length(angU)
+    if ~isempty(Sh.U.ang.met{i})
     xi1{i} = 1:length(Sh.U.axis.ton{i}(:,1));
     fit1{i}=polyfit(xi1{i}',Sh.U.axis.ton{i}(:,1),8);  
     yi1{i}=polyval(fit1{i},xi1{i});
+    end
 end
 
 for i=1:length(angU)
+    if ~isempty(Sh.U.ang.met{i})
     xi2{i} = 1:length(Sh.U.axis.ton{i}(:,2));
     fit2{i}=polyfit(xi2{i}',Sh.U.axis.ton{i}(:,2),8);  
     yi2{i}=polyval(fit2{i},xi2{i});
+    end
 end
 for i=1:length(angU)
+    if ~isempty(Sh.U.ang.met{i})
     xi3{i} = 1:length(Sh.U.axis.ton{i}(:,3));
     fit3{i}=polyfit(xi3{i}',Sh.U.axis.ton{i}(:,3),8);  
     yi3{i}=polyval(fit3{i},xi3{i});
+    end
 end
 for i=1:length(angU)
+    if ~isempty(Sh.U.ang.met{i})
     JxUt(i) =  mean(abs(Sh.U.axis.ton{i}(:,1)-yi1{i}'))+mean(abs(Sh.U.axis.ton{i}(:,2)-yi2{i}'))+mean(abs(Sh.U.axis.ton{i}(:,3)-yi3{i}'));
+    end
 end
 
 velocityU = velocityU';
@@ -166,15 +194,21 @@ JxUt = JxUt';
 % end 
 
 
-[Mdata,Sdata,p] = diffAnaly2(velocityA,'Affect',velocityU,'Control','运动速率',Display);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',velocityA,'运动速率',Display);
-% [Mdata,Sdata,p] = diffAnaly(JxAt(seve),'Severely',JxAt(mild),'Mildly',JxUt,'Control',1);
-[Mdata,Sdata,p] = diffAnaly2(log(JxAt),'Affect',log(JxUt),'Control','运动平稳度',Display);
-[r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(JxAt),'旋转轴平稳度',Display);
-% [Mdata,Sdata,p] = diffAnaly2(log(jerkA/meanA(i)),'Affect',log(jerkU/meanU(i)),'Control',1);
-% [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(jerkA'/meanA(i)),'jerk',1);
+% % % [Mdata,Sdata,p] = diffAnaly(velocityA,'Affect',velocityU,'Control','运动速率',Display);
+% % % [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',velocityA,'运动速率',Display);
+% % % % [Mdata,Sdata,p] = diffAnaly(JxAt(seve),'Severely',JxAt(mild),'Mildly',JxUt,'Control',1);
+% % % [Mdata,Sdata,p] = diffAnaly(log(JxAt),'Affect',log(JxUt),'Control','运动平稳度',Display);
+% % % [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(JxAt),'旋转轴平稳度',Display);
+% % % [Mdata,Sdata,p] = diffAnaly2(log(jerkA/meanA(i)),'Affect',log(jerkU/meanU(i)),'Control',1);
+% % % [r,p] = corrAnaly(Sh.A.FM,'Fugl-Meyer评分',log(jerkA'/meanA(i)),'jerk',1);
 
-
+% the five features extracted are velocityA/U; log(axisA/U); meanA/U; log(TxA/Ut); log(TravA/U)
+fA2=log(axisA);
+fA4=log(JxAt);
+fA5=log(TvarA);
+fU2=log(axisU);
+fU4=log(JxUt);
+fU5=log(TvarU);
 %% regression analysis
 n =35;
 index = rand(n,1);
@@ -195,7 +229,7 @@ hist(r);
 xlabel('Residuals');
 ylabel('Frequency');
 title('Residual Hist');
-[r,p] = corrAnaly(Y,'Fugl-Meyer Score',Y+r,'Flexion FAS',1);
+% % % [r,p] = corrAnaly(Y,'Fugl-Meyer Score',Y+r,'Flexion FAS',1);
 % [r,p] = corrAnaly(Y1,'Fugl-Meyer评分',Y1+r,'训练集',0);
 % [r,p] = corrAnaly(Y2,'Fugl-Meyer评分',X2*b,'校验集',0);
 % error = sum(abs(Y2 - X2*b))/length(Y2);

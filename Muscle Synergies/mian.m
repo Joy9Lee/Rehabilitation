@@ -1,6 +1,6 @@
 close all;
 clc;
-%clear;
+clear;
 nameList = dir(fullfile('.','affect'));
 sEMG=cell(1,length(nameList)-2);
 for n = 3:length(nameList)

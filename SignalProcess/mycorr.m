@@ -1,7 +1,7 @@
-function [r,p]=mycorr(data1,data2,varargin)
+function [r,p]=mycorr(data1,data2,pointText,varargin)
 %% reload function
-error(nargchk(2,3,nargin));
-if nargin ==3 && varargin{1}==1
+error(nargchk(3,4,nargin));
+if nargin==4 && varargin{1}==1
     Display = 1;
 else
     Display = 0;
@@ -17,6 +17,11 @@ r1=r1(1,2);
 if Display
 figure
 plot(data1,data2,'*')
+if pointText~=0
+    for i= 1:length(data1)
+        text(data1(i)+var(data1)/1000,data2(i)+var(data2)/1000,num2str(pointText(i)));
+    end
+end
 hold on
 po=polyfit(data1,data2,1);
 x1=linspace(min(data1),max(data1));

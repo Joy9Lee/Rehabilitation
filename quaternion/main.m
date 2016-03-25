@@ -3,7 +3,7 @@ clear;
 clc;
 %%
 load('../DATA/kineA');
-<<<<<<< HEAD:quaternion/main.m
+%<<<<<<< HEAD:quaternion/main.m
 load('../DATA/kineU');
 PART = 2;
 %% glb2body 
@@ -12,28 +12,28 @@ PART = 2;
 %     for j=1:4
 % %         kineA.quat(i).limb{2}=quatdivide(kineA.quat(i).limb{1},kineA.quat(i).limb{2});
 %         kineA.quat(i).limb{2}=quatmultiply(quatinv(kineA.quat(i).limb{1}),kineA.quat(i).limb{2});
-=======
+%=======
 load('../DATA/kineUA');
 load('../DATA/kineU');
-PART = 2;
+PART = 3;
 %% glb2body 
 % PART = 2;
 % for i=1:length(kineA.name)
 %     for j=1:4
 % %         kineA.quat(i).limb{2}=quatdivide(kineA.quat(i).limb{1},kineA.quat(i).limb{2});
 %         kineA.quat(i).limb{2}=quatmultiply(quatinv(kineA.quat(i).limb{1}),(kineA.quat(i).limb{2}));
->>>>>>> 71d8a58c36b86ee2c88f4c01568b9b60eeb6eca4:quaternion/main.m
+%>>>>>>> 71d8a58c36b86ee2c88f4c01568b9b60eeb6eca4:quaternion/main.m
 %     end    
 % end
 % 
 % for i=1:length(kineU.name)
 %     for j=1:4
 % %         kineU.quat(i).limb{2}=quatdivide(kineU.quat(i).limb{1},kineU.quat(i).limb{2});
-<<<<<<< HEAD:quaternion/main.m
+%<<<<<<< HEAD:quaternion/main.m
 %         kineU.quat(i).limb{2}=quatmultiply(quatinv(kineU.quat(i).limb{1}),kineU.quat(i).limb{2});
-=======
+%=======
 %         kineA.quat(i).limb{2}=quatmultiply(quatinv(kineA.quat(i).limb{1}),(kineA.quat(i).limb{2}));
->>>>>>> 71d8a58c36b86ee2c88f4c01568b9b60eeb6eca4:quaternion/main.m
+%>>>>>>> 71d8a58c36b86ee2c88f4c01568b9b60eeb6eca4:quaternion/main.m
 %     end    
 % end
 %%

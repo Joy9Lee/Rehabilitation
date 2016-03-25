@@ -16,7 +16,7 @@ Sh1.U = Sh.U;
 [temp index] = sort(Sh.A.FM);
 Tru.A = Tru.A(index);
 Tru.FM = Tru.FM(index);
-Tru.U = Tru.U
+Tru.U = Tru.U;
 figure;
 for i = 1:length(Sh1.A.FM)
     subplot(5,7,i)

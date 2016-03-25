@@ -1,23 +1,26 @@
-%% syndata 
-close all
-clear all
-clc
+% syn.m
+% plot the iEMG with ang 
+close all; clear all; clc;
 load('../../DATA/SynDataA');
 load('../../DATA/SynDataU');
+addpath('../../SignalProcess');
 addpath('../../quaternion')
 addpath('../../feature')
 SHD=2;
-%ELB=
-%% affected shoulder angle
+ELB=5;
+%% affected shoulder & elbow angle
 for i=1:length(SynDataA.name)
     for j=1:4
-        A(i).ang{j}=quatfac(SynDataA.quat(i).limb{j});
-    end
+        
+        A(i).ang{j}=quatfac(SynDataA.quat(i).limb{j});                      % shoulder angle:A(i).ang{SHD}
+        %A(i).ang{j}=quat2angle(SynDataA.quat(i).limb{j});
+    
+    end                                                                       % elbow angle:A(i).ang{ELB}
 end
 % segment
 for i=1:length(SynDataA.name)
     %A.ang{i}=quatfac(SynDataA.quat(i).limb{2});
-    A(i).tonA{1}=A(i).ang{SHD}(SynDataA.loc0(i) : SynDataA.loc(i));         %shoulder angle
+    A(i).tonA{1}=A(i).ang{SHD}(SynDataA.loc0(i) : SynDataA.loc(i));         % shoulder angle
     %A.ang.met{i}=A(i).angA{PART}(kineA.loc1(i) : end);
 end
 %% control shoulder angle
@@ -33,12 +36,14 @@ for i=1:length(SynDataU.name)
     U(i).tonA{1}=U(i).ang{SHD}(SynDataU.loc0(i) : SynDataU.loc(i));         %shoulder angle
     %A.ang.met{i}=A(i).angA{PART}(kineA.loc1(i) : end);
 end
+
 %% plot angle
-if 0
+if 1
 figure
 for i=1:length(SynDataA.name)
     subplot(4,6,i)
-    plot( A(i).ang{SHD}/90)
+     plot( A(i).ang{SHD}/90)
+     %plot(A(i).ang{ELB})
      hold on;
      plot([SynDataA.loc(i) SynDataA.loc(i)],[0 1],'--m');
      plot([SynDataA.loc0(i) SynDataA.loc0(i)],[0 1],'--k');
@@ -47,6 +52,8 @@ figure
 for i=1:length(SynDataU.name)
     subplot(4,6,i)
     plot( U(i).ang{SHD}/90)
+%    plot( U(i).ang{ELB})
+
     hold on
     plot([SynDataU.loc(i) SynDataU.loc(i)],[0 1],'--m');
     plot([SynDataU.loc0(i) SynDataU.loc0(i)],[0 1],'--k');
@@ -68,7 +75,7 @@ end
 end
 % A.ang=A.ang';
 % U.ang=U.ang';
-%% iEMG
+% iEMG
 
 for i=1:length(SynDataA.EMG)
     A(i).iEMG=CiEMG(SynDataA.EMG{i},20);
@@ -77,7 +84,7 @@ for i=1:length(SynDataU.EMG)
     U(i).iEMG=CiEMG(SynDataU.EMG{i},20);
 end
 
-%segment
+segment
 for i=1:length(SynDataA.name)
     A(i).tonE{1}=A(i).iEMG(SynDataA.loc0(i) : SynDataA.loc(i),:);         %shoulder angle
     
@@ -87,7 +94,7 @@ for i=1:length(SynDataU.name)
     
 end
 
-%% diff
+% % diff
 % for i=1:length(SynDataA.name)
 %     for j=1: length(A(i).tonE{1})
 %         d(i)=
@@ -110,7 +117,7 @@ for i=1:length(SynDataU.name)
 end
 end
 %% syndata all
-if 1
+if 0
 figure
 for i=1:length(SynDataA.name)
     subplot(4,6,i)
@@ -151,14 +158,10 @@ for i=1:length(SynDataU.name)
 end
 suptitle('Control Bice/Trice PowerRatio')
 end
-%% average syn
-
-
-%%
 
 
 %% single example
-if 1
+if 0
 a=3;
 c=5;
 figure

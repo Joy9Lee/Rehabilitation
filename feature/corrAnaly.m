@@ -29,10 +29,10 @@ r = eval(vpa(r,2));
 p = eval(vpa(p,2));
 r1=num2str(r);
 p1=num2str(p);
-% s1=strcat('N=16','   R=',r1,'   P=',p1);
+s1=strcat('N=16','   R=',r1,'   P=',p1);
 
 xlabel(label1);
 ylabel(label2);
-title(['R=' r1 '   ' 'P=' p1]);
+title(['R=' num2str(r1)   'P=' num2str(p1)]);
 
 end

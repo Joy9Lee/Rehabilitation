@@ -19,10 +19,10 @@ for i=1:length(SynDataA.EMG)
     m4(i)=max(abs(mvc{i}(:,3)));
     Hw1=fft(SynDataA.EMG{i}(:,3),N);
 %% plot time domain of raw EMG and mvc
-    if 0
-        figure(1)
-        subplot(5,5,i)
-        plot(SynDataA.EMG{i}(:,3))
+    if 1
+        figure
+        %subplot(5,5,i)
+        plot(SynDataA.EMG{9}(:,1))
         title(['FM=' num2str(SynDataA.FM(i))]);
         
     end
@@ -77,7 +77,7 @@ end
 %% plot one data
  i=4;
  N=length(SynDataA.EMG{i}(:,3));
-if 1
+if 0
         figure
         Hw7=fft(SynDataA.EMG{i}(:,3),N);
         plot(SynDataA.EMG{i}(:,3))
@@ -86,7 +86,7 @@ if 1
          plot((0:N-1)*fs/N,abs(Hw7));% 查看信号频谱
         
 end
-if 1
+if 0
         Hw8=fft(EMG{i}(:,3),N);
         figure
         plot(EMG{i}(:,3))
@@ -124,7 +124,7 @@ for i=1:length(SynDataU.EMG)
      end
      N2=length(SynDataU.EMG{i}(:,3));
      HwU=fft(SynDataU.EMG{i}(:,3),N2);
-     if 1
+     if 0
         figure(6)
         subplot(5,5,i)
         plot((0:N2-1)*fs/N2,abs(HwU));% 查看信号频谱

@@ -19,6 +19,7 @@ load('../DATA/KineU');
 for i=1:length(kineA.name)
     for j=1:4
         kineA.quat(i).limb{5}=quatmultiply(quatinv(kineA.quat(i).limb{1}),kineA.quat(i).limb{2});
+        
     end    
 end
 

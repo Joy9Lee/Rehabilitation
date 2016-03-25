@@ -1,16 +1,16 @@
 close all
 clear all
 clc
-load('../../DATA/SynDataA2');
+load('../../DATA/bothSideA');
 load('../../DATA/SynDataU');
 addpath('../../signalProcess')
 fs=50;
-indataA=SynDataA;
+indataA=bothSideA;
 indataU=SynDataU;
-for i=1:length(indataA.EMG)
-    
-    CmvcA{i}=CiEMG(indataA.EMG{i},20);
-    mmvcA{i}=mean(abs(CmvcA{i}));
+for i=1:length(indataA.name)
+    mmvcA{i}=max(winRMS(indataA.mvcA{i},100));
+    CmvcA{i}=CiEMG(indataA.EMGA{i},20);
+    mmvcA{i}=mean(winRMS(CmvcA{i}));
     CmvcU{i}=CiEMG(indataA.EMGU{i},20);
     mmvcU{i}=mean(abs(CmvcU{i}));
     for m=1:7

@@ -4,6 +4,7 @@ clc;
 addpath('../DATA')
 load('synDataA');
 load('synDataU');
+synDataA=SynDataA;
 %%
 affectInput=[0,0,0,0,0,0];
 affectOutput=[0];
